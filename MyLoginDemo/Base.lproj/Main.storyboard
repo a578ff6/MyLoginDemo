@@ -24,18 +24,20 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ytO-FM-Rek"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="登入"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="登入"/>
                                         <connections>
                                             <segue destination="s0d-VE-dgu" kind="show" id="dXn-zU-tvt"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4g4-rX-XsE">
                                         <rect key="frame" x="0.0" y="60" width="313" height="40"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="註冊"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="註冊"/>
                                         <connections>
-                                            <segue destination="mhO-wD-ssI" kind="show" id="NuX-He-CB8"/>
+                                            <segue destination="mhO-wD-ssI" kind="show" id="yhA-7k-7mk"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -53,6 +55,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5RQ-CX-90h"/>
+                    <connections>
+                        <outlet property="loginButton" destination="jgm-nb-tB3" id="aZU-Xx-Chs"/>
+                        <outlet property="signUpButton" destination="4g4-rX-XsE" id="vkF-Vw-aqT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PF7-Nc-hzx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -67,14 +73,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KFN-YC-t65">
-                                <rect key="frame" x="40" y="99.000000000000014" width="313" height="200.33333333333337"/>
+                                <rect key="frame" x="40" y="99" width="313" height="160"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7od-aa-7wQ">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7od-aa-7wQ">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydZ-vx-Lca">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydZ-vx-Lca">
                                         <rect key="frame" x="0.0" y="60" width="313" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -84,18 +90,13 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="HeY-RW-S0x"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="登入"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="登入"/>
                                         <connections>
                                             <action selector="loginButtonTapped:" destination="s0d-VE-dgu" eventType="touchUpInside" id="BT7-qq-0Y8"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kab-Zb-zfG">
-                                        <rect key="frame" x="0.0" y="180" width="313" height="20.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="M2h-BH-GS6" firstAttribute="height" secondItem="7od-aa-7wQ" secondAttribute="height" id="rDi-NY-spg"/>
@@ -114,7 +115,6 @@
                     <navigationItem key="navigationItem" id="VQQ-aS-ZqV"/>
                     <connections>
                         <outlet property="emailTextField" destination="7od-aa-7wQ" id="7RH-I2-Yqx"/>
-                        <outlet property="errorLabel" destination="Kab-Zb-zfG" id="ET4-ot-UxM"/>
                         <outlet property="loginButton" destination="M2h-BH-GS6" id="EDH-c1-Gke"/>
                         <outlet property="passwordTextField" destination="ydZ-vx-Lca" id="OvU-br-SJQ"/>
                     </connections>
@@ -132,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aED-aX-5Pr">
-                                <rect key="frame" x="40" y="98.999999999999972" width="313" height="320.33333333333326"/>
+                                <rect key="frame" x="40" y="99" width="313" height="280"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WdG-NG-zrD">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="40"/>
@@ -159,18 +159,13 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="vIL-Gp-Buh"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="註冊"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="註冊"/>
                                         <connections>
                                             <action selector="signUpButtonTapped:" destination="mhO-wD-ssI" eventType="touchUpInside" id="VZi-Rw-Cxe"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lC-WP-fD9">
-                                        <rect key="frame" x="0.0" y="300" width="313" height="20.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="D04-jk-5V7" firstAttribute="height" secondItem="WdG-NG-zrD" secondAttribute="height" id="F82-kP-VNr"/>
@@ -191,7 +186,6 @@
                     <navigationItem key="navigationItem" id="S17-V0-9zq"/>
                     <connections>
                         <outlet property="emailTextField" destination="D04-jk-5V7" id="5QI-QC-bua"/>
-                        <outlet property="errorLabel" destination="6lC-WP-fD9" id="j2V-Vb-dZg"/>
                         <outlet property="firstNameTextField" destination="WdG-NG-zrD" id="hxW-3a-80C"/>
                         <outlet property="lastNameTextField" destination="e21-Hp-LDw" id="Gsm-jQ-cC2"/>
                         <outlet property="passwordTextField" destination="3n9-le-nFU" id="oxy-D4-8YF"/>
@@ -200,12 +194,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91O-ty-Im7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2356" y="450"/>
+            <point key="canvasLocation" x="2356" y="492"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="D6E-kj-IaQ">
             <objects>
-                <viewController id="Jvd-ls-weL" customClass="HomeViewController" customModule="MyLoginDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="Jvd-ls-weL" customClass="HomeViewController" customModule="MyLoginDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0jv-hL-dfy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,8 +218,12 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2OF-Sl-ZSR"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="登出"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="登出"/>
+                                        <connections>
+                                            <action selector="signOutButtonTapped:" destination="Jvd-ls-weL" eventType="touchUpInside" id="pVh-cQ-W8n"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -242,6 +240,9 @@
                             <constraint firstItem="YS5-fw-oFr" firstAttribute="centerY" secondItem="0jv-hL-dfy" secondAttribute="centerY" id="jGt-aW-75Y"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="signOutButton" destination="NEE-dd-Spd" id="Pw9-Vn-XWp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n4k-WF-4uA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -268,9 +269,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

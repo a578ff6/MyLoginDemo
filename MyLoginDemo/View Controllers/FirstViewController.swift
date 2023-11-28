@@ -8,12 +8,22 @@
 import UIKit
 
 class FirstViewController: UIViewController {
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
+    
+    @IBOutlet weak var signUpButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+       setUpElements()
     }
     
+    func setUpElements() {
+        Utilities.styleHollowButton(loginButton)
+        Utilities.styleFilledButton(signUpButton)
+    }
 
 }

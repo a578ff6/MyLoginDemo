@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		932FBA392B160B04006B7896 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA382B160B04006B7896 /* FirebaseController.swift */; };
+		932FBA3C2B165572006B7896 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA3B2B165572006B7896 /* Utilities.swift */; };
+		932FBA402B1660BD006B7896 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA3F2B1660BD006B7896 /* AlertService.swift */; };
+		932FBA422B167F92006B7896 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA412B167F92006B7896 /* Constants.swift */; };
 		93B704BE2B1521A300F5B46F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B704BD2B1521A300F5B46F /* AppDelegate.swift */; };
 		93B704C02B1521A300F5B46F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B704BF2B1521A300F5B46F /* SceneDelegate.swift */; };
 		93B704C52B1521A300F5B46F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B704C32B1521A300F5B46F /* Main.storyboard */; };
@@ -49,6 +52,9 @@
 
 /* Begin PBXFileReference section */
 		932FBA382B160B04006B7896 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
+		932FBA3B2B165572006B7896 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		932FBA3F2B1660BD006B7896 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		932FBA412B167F92006B7896 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		93B704BA2B1521A300F5B46F /* MyLoginDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLoginDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B704BD2B1521A300F5B46F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93B704BF2B1521A300F5B46F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		932FBA3A2B163BF1006B7896 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				932FBA382B160B04006B7896 /* FirebaseController.swift */,
+				932FBA3F2B1660BD006B7896 /* AlertService.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		93B704B12B1521A300F5B46F = {
 			isa = PBXGroup;
 			children = (
@@ -120,11 +135,13 @@
 		93B704BC2B1521A300F5B46F /* MyLoginDemo */ = {
 			isa = PBXGroup;
 			children = (
+				932FBA3A2B163BF1006B7896 /* Controllers */,
 				93B705102B1535B600F5B46F /* View Controllers */,
 				93B704BD2B1521A300F5B46F /* AppDelegate.swift */,
+				932FBA412B167F92006B7896 /* Constants.swift */,
 				93B704BF2B1521A300F5B46F /* SceneDelegate.swift */,
+				932FBA3B2B165572006B7896 /* Utilities.swift */,
 				93B704C32B1521A300F5B46F /* Main.storyboard */,
-				932FBA382B160B04006B7896 /* FirebaseController.swift */,
 				93B704C62B1521A500F5B46F /* Assets.xcassets */,
 				93B704C82B1521A500F5B46F /* LaunchScreen.storyboard */,
 				93B704CB2B1521A500F5B46F /* Info.plist */,
@@ -253,7 +270,10 @@
 				93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */,
 				93B7050B2B15358B00F5B46F /* SignUpViewController.swift in Sources */,
 				93B705142B15371000F5B46F /* FirstViewController.swift in Sources */,
+				932FBA422B167F92006B7896 /* Constants.swift in Sources */,
 				93B704BE2B1521A300F5B46F /* AppDelegate.swift in Sources */,
+				932FBA3C2B165572006B7896 /* Utilities.swift in Sources */,
+				932FBA402B1660BD006B7896 /* AlertService.swift in Sources */,
 				93B704C02B1521A300F5B46F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
