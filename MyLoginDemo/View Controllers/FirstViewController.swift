@@ -7,11 +7,10 @@
 
 import UIKit
 
+/// 一開始的登入、註冊選擇頁面
 class FirstViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
-    
-    
     @IBOutlet weak var signUpButton: UIButton!
     
 

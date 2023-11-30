@@ -15,5 +15,7 @@ struct Constants {
         
         /// 用於表示 HomeViewController 在 Storyboard 中的識別符
         static let homeViewController = "HomeViewController"
+        
+        static let firstViewController = "FirstViewController"
     }
 }

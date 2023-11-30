@@ -33,4 +33,27 @@ class Utilities {
         button.tintColor = UIColor.label
     }
     
+    static func styleImageView(_ imageView: UIImageView) {
+        imageView.layer.cornerRadius = imageView.frame.height / 2
+        imageView.clipsToBounds = true
+    }
+    
+    static func styleLabelWithUnderLine(_ label: UILabel) {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: label.frame.height - 2, width: label.frame.width, height: 2)
+        bottomLine.backgroundColor = UIColor.init(red: 0, green: 153/255, blue: 153/255, alpha: 1).cgColor
+        
+        label.layer.addSublayer(bottomLine)
+    }
+    
 }
+
+/*
+ static func styleLabelWithUnderline(_ label: UILabel) {
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0, y: label.frame.height - 1, width: label.frame.width, height: 1)
+        bottomLine.backgroundColor = UIColor.black.cgColor // 這裡可以設置你想要的顏色
+
+        label.layer.addSublayer(bottomLine)
+    }
+ */

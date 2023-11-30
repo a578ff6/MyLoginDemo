@@ -61,6 +61,7 @@ class SignUpViewController: UIViewController {
         
     }
     
+    
     func setUpElements() {
         Utilities.styleTextField(firstNameTextField)
         Utilities.styleTextField(lastNameTextField)

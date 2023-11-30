@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 /// FirebaseController 類別用於集中處理 Firebase 相關的操作，如用戶註冊和登入。
 class FirebaseController {
@@ -71,6 +72,7 @@ class FirebaseController {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 completion(.failure(error))
+                print("觀察\(error.localizedDescription)")
                 return
             }
             
@@ -82,8 +84,68 @@ class FirebaseController {
             completion(.success(user))
         }
     }
-    
 
+    /*
+     Auth.auth().signIn(withEmail: "peter@neverland.com", password: "123456") { result, error in
+          guard error == nil else {
+             print(error?.localizedDescription)
+             return
+          }
+        print("success")
+     }
+     */
     
+    /// 發送密碼重置郵件
+    func sendPasswordRest(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(.failure(error))       // 發生錯誤，通過完成處理程序返回錯誤
+            } else {
+                completion(.success(()))          // 密碼重置郵件發送成功
+            }
+        }
+    }
+    
+    /// 獲取用戶的資料
+    func fetchUserProfile(uid: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).getDocument { (document, error ) in
+            if let document = document, document.exists {
+                do {
+                    let userProfile = try document.data(as: UserProfile.self)
+                    completion(.success(userProfile))
+                } catch {
+                    completion(.failure(error))
+                }
+            } else if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.failure(FirebaseError.unknownError))
+            }
+        }
+    }
+    
+    // MARK: - 測試
+    func uploadProfileImage(_ image: UIImage, forUserID userID: String, completion: @escaping (Result<URL, Error>) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            return      // 處理無法轉換圖片的錯誤
+        }
+        
+        let storageRef = Storage.storage().reference().child("profile_images").child("\(userID).jpg")
+        storageRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            storageRef.downloadURL { url, error in
+                if let url = url {
+                    completion(.success(url))    // 可以選擇將 URL 存儲到 Firestore 的用戶文檔中
+                } else if let error = error {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }
 

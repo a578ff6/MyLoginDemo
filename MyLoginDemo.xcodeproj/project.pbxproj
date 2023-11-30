@@ -11,12 +11,12 @@
 		932FBA3C2B165572006B7896 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA3B2B165572006B7896 /* Utilities.swift */; };
 		932FBA402B1660BD006B7896 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA3F2B1660BD006B7896 /* AlertService.swift */; };
 		932FBA422B167F92006B7896 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA412B167F92006B7896 /* Constants.swift */; };
+		932FBA442B16926C006B7896 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932FBA432B16926C006B7896 /* ForgotPasswordViewController.swift */; };
 		93B704BE2B1521A300F5B46F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B704BD2B1521A300F5B46F /* AppDelegate.swift */; };
 		93B704C02B1521A300F5B46F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B704BF2B1521A300F5B46F /* SceneDelegate.swift */; };
 		93B704C52B1521A300F5B46F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B704C32B1521A300F5B46F /* Main.storyboard */; };
 		93B704C72B1521A500F5B46F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93B704C62B1521A500F5B46F /* Assets.xcassets */; };
 		93B704CA2B1521A500F5B46F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93B704C82B1521A500F5B46F /* LaunchScreen.storyboard */; };
-		93B704D22B15223100F5B46F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93B704D12B15223100F5B46F /* GoogleService-Info.plist */; };
 		93B704D52B15236100F5B46F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 93B704D42B15236100F5B46F /* FirebaseAnalytics */; };
 		93B704D72B15236100F5B46F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 93B704D62B15236100F5B46F /* FirebaseAnalyticsOnDeviceConversion */; };
 		93B704D92B15236100F5B46F /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93B704D82B15236100F5B46F /* FirebaseAnalyticsSwift */; };
@@ -48,6 +48,9 @@
 		93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7050C2B15359F00F5B46F /* LoginViewController.swift */; };
 		93B7050F2B1535B100F5B46F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7050E2B1535B100F5B46F /* HomeViewController.swift */; };
 		93B705142B15371000F5B46F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B705132B15371000F5B46F /* FirstViewController.swift */; };
+		93CB44562B176C3A0052331D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CB44552B176C3A0052331D /* GoogleService-Info.plist */; };
+		93CB44582B17BE0F0052331D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44572B17BE0F0052331D /* UserProfile.swift */; };
+		93CB445C2B17CC820052331D /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB445B2B17CC820052331D /* ImagePickerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,7 @@
 		932FBA3B2B165572006B7896 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		932FBA3F2B1660BD006B7896 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		932FBA412B167F92006B7896 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		932FBA432B16926C006B7896 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		93B704BA2B1521A300F5B46F /* MyLoginDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLoginDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B704BD2B1521A300F5B46F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93B704BF2B1521A300F5B46F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,11 +66,13 @@
 		93B704C62B1521A500F5B46F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93B704C92B1521A500F5B46F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93B704CB2B1521A500F5B46F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93B704D12B15223100F5B46F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93B7050A2B15358B00F5B46F /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		93B7050C2B15359F00F5B46F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		93B7050E2B1535B100F5B46F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		93B705132B15371000F5B46F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		93CB44552B176C3A0052331D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		93CB44572B17BE0F0052331D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		93CB445B2B17CC820052331D /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,12 +146,14 @@
 				93B704BD2B1521A300F5B46F /* AppDelegate.swift */,
 				932FBA412B167F92006B7896 /* Constants.swift */,
 				93B704BF2B1521A300F5B46F /* SceneDelegate.swift */,
+				93CB445B2B17CC820052331D /* ImagePickerManager.swift */,
 				932FBA3B2B165572006B7896 /* Utilities.swift */,
+				93CB44572B17BE0F0052331D /* UserProfile.swift */,
 				93B704C32B1521A300F5B46F /* Main.storyboard */,
 				93B704C62B1521A500F5B46F /* Assets.xcassets */,
 				93B704C82B1521A500F5B46F /* LaunchScreen.storyboard */,
 				93B704CB2B1521A500F5B46F /* Info.plist */,
-				93B704D12B15223100F5B46F /* GoogleService-Info.plist */,
+				93CB44552B176C3A0052331D /* GoogleService-Info.plist */,
 			);
 			path = MyLoginDemo;
 			sourceTree = "<group>";
@@ -154,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				93B7050A2B15358B00F5B46F /* SignUpViewController.swift */,
+				932FBA432B16926C006B7896 /* ForgotPasswordViewController.swift */,
 				93B7050C2B15359F00F5B46F /* LoginViewController.swift */,
 				93B7050E2B1535B100F5B46F /* HomeViewController.swift */,
 				93B705132B15371000F5B46F /* FirstViewController.swift */,
@@ -252,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93B704CA2B1521A500F5B46F /* LaunchScreen.storyboard in Resources */,
-				93B704D22B15223100F5B46F /* GoogleService-Info.plist in Resources */,
+				93CB44562B176C3A0052331D /* GoogleService-Info.plist in Resources */,
 				93B704C72B1521A500F5B46F /* Assets.xcassets in Resources */,
 				93B704C52B1521A300F5B46F /* Main.storyboard in Resources */,
 			);
@@ -267,13 +276,16 @@
 			files = (
 				93B7050F2B1535B100F5B46F /* HomeViewController.swift in Sources */,
 				932FBA392B160B04006B7896 /* FirebaseController.swift in Sources */,
+				932FBA442B16926C006B7896 /* ForgotPasswordViewController.swift in Sources */,
 				93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */,
 				93B7050B2B15358B00F5B46F /* SignUpViewController.swift in Sources */,
 				93B705142B15371000F5B46F /* FirstViewController.swift in Sources */,
 				932FBA422B167F92006B7896 /* Constants.swift in Sources */,
 				93B704BE2B1521A300F5B46F /* AppDelegate.swift in Sources */,
+				93CB44582B17BE0F0052331D /* UserProfile.swift in Sources */,
 				932FBA3C2B165572006B7896 /* Utilities.swift in Sources */,
 				932FBA402B1660BD006B7896 /* AlertService.swift in Sources */,
+				93CB445C2B17CC820052331D /* ImagePickerManager.swift in Sources */,
 				93B704C02B1521A300F5B46F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
