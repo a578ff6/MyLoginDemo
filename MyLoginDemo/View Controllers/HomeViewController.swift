@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Kingfisher
 
 /// 確定登入、註冊成功，並提供登出功能
 class HomeViewController: UIViewController {
@@ -59,6 +60,15 @@ class HomeViewController: UIViewController {
                 case .success(let url):
                     print("圖片上傳成功: \(url)")
                     self?.userPhotoImageView.image = image
+                    /// 更新 Firestore 中的用戶資料（大頭照）
+                    FirebaseController.shared.updateUserProfilePhoto(uid: uid, photoURL: url) { result in
+                        switch result {
+                        case .success():
+                            print("用戶資料更新成功")
+                        case .failure(let error):
+                            print("用戶資料更新失敗: \(error)")
+                        }
+                    }
                 case .failure(let error):
                     print("圖片上傳失敗: \(error)")
                 }
@@ -71,17 +81,23 @@ class HomeViewController: UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         FirebaseController.shared.fetchUserProfile(uid: uid) { [weak self] result in
-            switch result {
-            case .success(let userProfile):
-                self?.fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
-                self?.emailLabel.text = userProfile.email
-            case .failure(let error):
-                print("錯誤： \(error.localizedDescription)")
-                self?.fullNameLabel.text = "unknow"
-                self?.emailLabel.text = "unknow"
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let userProfile):
+                    self?.fullNameLabel.text = "\(userProfile.firstName) \(userProfile.lastName)"
+                    self?.emailLabel.text = userProfile.email
+                    
+                    if let photoURLString = userProfile.photoURL, let url = URL(string: photoURLString) {
+                        self?.userPhotoImageView.kf.setImage(with: url, placeholder: UIImage(named: "person.crop.circle.fill"))
+                    }
+                    
+                case .failure(let error):
+                    print("錯誤： \(error.localizedDescription)")
+                }
             }
         }
     }
+    
     
     func setUpElements() {
         Utilities.styleFilledButton(signOutButton)
@@ -104,4 +120,3 @@ class HomeViewController: UIViewController {
     }
     
 }
-

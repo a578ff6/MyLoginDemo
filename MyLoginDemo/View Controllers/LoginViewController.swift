@@ -9,19 +9,18 @@
  tony12345@gmail.com
  12345678
  a578ff6@gmail.com
- 199122_cg96
+ tony11@@
  */
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
-import Firebase
 
+// MARK: 負責處理用戶登入的視圖控制器
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!    
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     
@@ -30,8 +29,9 @@ class LoginViewController: UIViewController {
         
         setUpElements()
     }
-
     
+
+    /// 處理登入按鈕
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         
         // 檢查電子郵件和密碼輸入框是否有輸入，並且不為空
@@ -41,47 +41,25 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // MARK: - （測試）使用 FirebaseController 進行登錄操作
-        FirebaseController.shared.signIn(email: email, password: password) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.transitionToHome()
-                case .failure(let error):
-                    if let errorCode = AuthErrorCode.Code(rawValue: (error as NSError).code) {
-                        var message = ""
-                        switch errorCode {
-                        case .invalidEmail:
-                            message = "電子郵件地址格式不正確。"
-                        case .userNotFound:
-                            message = "該電子郵件地址未註冊。"
-                        case .wrongPassword:
-                            message = "密碼不正確。"
-                        default:
-                            message = "登入時發生錯誤：\(error.localizedDescription)"
-                        }
-                        AlertService.showAlert(withTitle: "登入錯誤", message: message, inViewController: self!)
-                    }
-                }
-            }
-        }
-
-        
-        /*
-        // 使用 FirebaseController 進行登錄操作
+        // 呼叫 FirebaseController 進行登入
         FirebaseController.shared.signIn(email: email, password: password) { [weak self] result in
             switch result {
             case .success(_):
+                
+                // 登入成功，進行頁面跳轉
                 self?.transitionToHome()
+                
             case .failure(let error):
-                print("錯誤詳情: \(error)")
+                
+                // 登入失敗，顯示錯誤訊息
+                // AlertService.showAlert(withTitle: "錯誤", message: "帳號或密碼錯誤", inViewController: self!)
                 AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!)
             }
         }
-        */
-
+   
     }
     
+    /// 設定介面元素的外觀
     func setUpElements() {
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
@@ -105,4 +83,3 @@ class LoginViewController: UIViewController {
     }
     
 }
-

@@ -7,8 +7,8 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
+// MARK: 負責處理用戶註冊的視圖控制器
 class SignUpViewController: UIViewController {
 
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -24,9 +24,10 @@ class SignUpViewController: UIViewController {
         
     }
     
+    /// 處理註冊按鈕
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         
-        // 檢查文本框是否有輸入，並且不為空
+        // 檢查 TextField 是否有輸入，並且不為空
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty,
               let firstName = firstNameTextField.text, !firstName.isEmpty,
@@ -37,31 +38,34 @@ class SignUpViewController: UIViewController {
         
         // 檢查電子郵件格式是否有效
         if !FirebaseController.isEmailvalid(email) {
-            AlertService.showAlert(withTitle: "錯誤", message: "無效的電子郵件格式", inViewController: self)
+            AlertService.showAlert(withTitle: "錯誤", message: "請輸入有效的電子郵件地址，例如：example@example.com", inViewController: self)
             return
         }
         
         // 檢查密碼是否符合規範
         if !FirebaseController.isPasswordValid(password) {
-            AlertService.showAlert(withTitle: "錯誤", message: "密碼不符合要求", inViewController: self)
+            AlertService.showAlert(withTitle: "錯誤", message: "密碼需至少包含8位字符，並包括至少一個小寫字母和一個特殊字符", inViewController: self)
             return
         }
         
-        // 調用 FirebaseController 來創建用戶
+        // 透過 FirebaseController 進行用戶註冊
         FirebaseController.shared.creatUser(email: email, password: password, firstName: firstName, lastName: lastName) { [weak self] result in
             switch result {
             case .success(_):
+                
                 print("用戶註冊成功")
-                // 在這裡添加註冊成功後的操作，跳轉到主頁面
+                // 註冊成功後跳轉至首頁
                 self?.transitionToHome()
+                
             case .failure(let error):
+                
                 AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!)
             }
         }
         
     }
     
-    
+    /// 設定介面元素的樣式
     func setUpElements() {
         Utilities.styleTextField(firstNameTextField)
         Utilities.styleTextField(lastNameTextField)
@@ -70,7 +74,7 @@ class SignUpViewController: UIViewController {
         Utilities.styleFilledButton(signUpButton)
     }
     
-    /// 註冊或登入成功後的處理
+    /// 註冊成功後的頁面跳轉處理
     func transitionToHome() {
         let homeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.homeViewController) as? HomeViewController
         

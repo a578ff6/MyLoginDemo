@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
+
+// MARK: 負責處理用戶忘記密碼的視圖控制器
 class ForgotPasswordViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var resetPasswordButton: UIButton!
     
     override func viewDidLoad() {
@@ -19,7 +21,10 @@ class ForgotPasswordViewController: UIViewController {
         setUpElements()
     }
     
+    
+    /// 處理重置密碼按鈕
     @IBAction func resetPasswordButtonTapped(_ sender: UIButton) {
+        // 驗證 emailTextField 是否已輸入
         guard let email = emailTextField.text, !email.isEmpty else {
             AlertService.showAlert(withTitle: "錯誤", message: "請填寫您的信箱", inViewController: self)
             return
@@ -31,6 +36,7 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
+        // 發送密碼重置請求
         FirebaseController.shared.sendPasswordRest(email: email) { result in
             switch result {
             case .success(_):
@@ -45,10 +51,13 @@ class ForgotPasswordViewController: UIViewController {
         }
     }
     
+    
+    /// 設定介面元素的樣式
     func setUpElements() {
         Utilities.styleTextField(emailTextField)
         Utilities.styleFilledButton(resetPasswordButton)
     }
+    
     
     /// 重置密碼後的轉場
     func transitionToFirstViewController() {
