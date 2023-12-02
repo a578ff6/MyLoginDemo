@@ -43,17 +43,19 @@ class LoginViewController: UIViewController {
         
         // 呼叫 FirebaseController 進行登入
         FirebaseController.shared.signIn(email: email, password: password) { [weak self] result in
-            switch result {
-            case .success(_):
-                
-                // 登入成功，進行頁面跳轉
-                self?.transitionToHome()
-                
-            case .failure(let error):
-                
-                // 登入失敗，顯示錯誤訊息
-                // AlertService.showAlert(withTitle: "錯誤", message: "帳號或密碼錯誤", inViewController: self!)
-                AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    
+                    // 登入成功，進行頁面跳轉
+                    self?.transitionToHome()
+                    
+                case .failure(let error):
+                    
+                    // 登入失敗，顯示錯誤訊息
+                    // AlertService.showAlert(withTitle: "錯誤", message: "帳號或密碼錯誤", inViewController: self!)
+                    AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!)
+                }
             }
         }
    

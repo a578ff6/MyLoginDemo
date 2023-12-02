@@ -38,15 +38,17 @@ class ForgotPasswordViewController: UIViewController {
         
         // 發送密碼重置請求
         FirebaseController.shared.sendPasswordRest(email: email) { result in
-            switch result {
-            case .success(_):
-                print("重置請求已發送")
-                AlertService.showAlert(withTitle: "通知", message: "如果您的信箱已註冊，我們將發送密碼重置郵件給您。", inViewController: self) {
-                    self.transitionToFirstViewController()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    print("重置請求已發送")
+                    AlertService.showAlert(withTitle: "通知", message: "如果您的信箱已註冊，我們將發送密碼重置郵件給您。", inViewController: self) {
+                        self.transitionToFirstViewController()
+                    }
+                case .failure(let error):
+                    print("錯誤")
+                    AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self)
                 }
-            case .failure(let error):
-                print("錯誤")
-                AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self)
             }
         }
     }
@@ -63,14 +65,18 @@ class ForgotPasswordViewController: UIViewController {
     func transitionToFirstViewController() {
         let firstViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.firstViewController) as? FirstViewController
         
+        // 創建導航控制器並將 FirstViewController 設為其根視圖控制器
+        let navigationController = UINavigationController(rootViewController: firstViewController!)
+
         // 加入轉場動畫
         let transition = CATransition()
         transition.type = CATransitionType.fade
         transition.duration = 0.5
         view.window?.layer.add(transition, forKey: kCATransition)
         
-        view.window?.rootViewController = firstViewController
+        view.window?.rootViewController = navigationController
         view.window?.makeKeyAndVisible()
     }
+
 
 }

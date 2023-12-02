@@ -121,7 +121,6 @@
 				93B705102B1535B600F5B46F /* View Controllers */,
 				93CB44E62B192B930052331D /* MediaResource */,
 				93B704BD2B1521A300F5B46F /* AppDelegate.swift */,
-				932FBA412B167F92006B7896 /* Constants.swift */,
 				93B704BF2B1521A300F5B46F /* SceneDelegate.swift */,
 				93B704C32B1521A300F5B46F /* Main.storyboard */,
 				93B704C62B1521A500F5B46F /* Assets.xcassets */,
@@ -163,6 +162,7 @@
 		93CB44E82B1A069E0052331D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				932FBA412B167F92006B7896 /* Constants.swift */,
 				93CB445B2B17CC820052331D /* ImagePickerManager.swift */,
 				932FBA3B2B165572006B7896 /* Utilities.swift */,
 			);

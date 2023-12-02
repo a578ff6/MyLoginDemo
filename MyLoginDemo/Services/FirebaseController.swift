@@ -36,7 +36,7 @@ class FirebaseController {
     }
     
     /// 創建新用戶，並將用戶資料儲存到 Firestore。
-    func creatUser(email: String, password: String, firstName: String, lastName: String, completion: @escaping (Result< User, Error>) -> Void) {
+    func creatUser(email: String, password: String, firstName: String, lastName: String, completion: @escaping (Result<User, Error>) -> Void) {
         
         // 使用 FirebaseAuth 進行用戶註冊
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -71,25 +71,32 @@ class FirebaseController {
     }
     
     
-    /// 登入，使用 FirebaseAuth 進行用戶登入。
+    /// 使用 FirebaseAuth 進行用戶登入。
+    /// - Parameters:
+    ///   - email: 用戶的電子郵件地址。
+    ///   - password: 用戶的密碼。
+    ///   - completion: 完成處理程序，返回用戶登入的結果。
     func signIn(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
         
+        // 使用 FirebaseAuth 的 signIn 方法進行用戶登入。傳入電子郵件和密碼作為認證。
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("登錄錯誤代碼: \((error as NSError).code), 描述: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
-            
-            // 確認成功登入
+                    
+            // 如果沒有錯誤發生，則檢查返回的用戶對象是否存在。
             guard let user = result?.user else {
                 completion(.failure(FirebaseError.unknownError))
                 return
             }
             
+            // 登入成功，回傳用戶對象。
             completion(.success(user))
         }
     }
+    
     
     /// 發送密碼重置郵件
     func sendPasswordRest(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -106,7 +113,7 @@ class FirebaseController {
     
     /// 獲取指定用戶ID的用戶資料。
     /// - Parameters:
-    /// - uid:   用戶ID，用於識別 Firestore 中的具體用戶文檔。
+    ///   - uid: 用戶ID，用於識別 Firestore 中的具體用戶文檔。
     func fetchUserProfile(uid: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
         
         /// 獲取 Firestore 實例
@@ -165,7 +172,7 @@ class FirebaseController {
         }
     }
     
-    
+
     /// 更新用戶的大頭照 URL 至 Firestore
     /// - Parameters:
     ///   - uid: 用戶的唯一識別碼（UID）。
@@ -184,6 +191,7 @@ class FirebaseController {
             }
         }
     }
+    
     
 }
 
