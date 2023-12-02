@@ -5,12 +5,6 @@
 //  Created by 曹家瑋 on 2023/11/28.
 //
 
-/*
- tony12345@gmail.com
- 12345678
- a578ff6@gmail.com
- tony11@@
- */
 
 import UIKit
 import FirebaseAuth
