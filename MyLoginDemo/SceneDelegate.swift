@@ -5,18 +5,43 @@
 //  Created by 曹家瑋 on 2023/11/28.
 //
 
+
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
+    /// 當場景與 App 連接時調用
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        // 確保使用的是 UIWindowScene
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        // 創建 UIWindow 並設置 rootViewController
+        window = UIWindow(windowScene: windowScene)
+        
+        // 檢查 Firebase Auth 是否有已登入的用戶
+        if Auth.auth().currentUser != nil {
+            // 如果已登入，導航到主頁面
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let homeViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController {
+                // 將 HomeViewController 設為 rootViewController
+                window?.rootViewController = homeViewController
+            }
+        } else {
+            // 如果未登入，導航到首頁
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let firstViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstViewController) as? FirstViewController {
+                // 將 FirstViewController 嵌入 UINavigationController
+                let navigationController = UINavigationController(rootViewController: firstViewController)
+
+                window?.rootViewController = navigationController
+            }
+        }
+        
+        // 使 window 可見
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -49,4 +74,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
+
 

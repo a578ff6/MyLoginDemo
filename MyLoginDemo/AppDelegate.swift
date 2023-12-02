@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 初始化 Firebase，設置 Firebase 的第一步
         FirebaseApp.configure()
-        
+    
         return true
     }
 

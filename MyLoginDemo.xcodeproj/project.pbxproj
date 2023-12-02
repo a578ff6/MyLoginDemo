@@ -21,7 +21,6 @@
 		93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7050C2B15359F00F5B46F /* LoginViewController.swift */; };
 		93B7050F2B1535B100F5B46F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B7050E2B1535B100F5B46F /* HomeViewController.swift */; };
 		93B705142B15371000F5B46F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B705132B15371000F5B46F /* FirstViewController.swift */; };
-		93CB44562B176C3A0052331D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CB44552B176C3A0052331D /* GoogleService-Info.plist */; };
 		93CB44582B17BE0F0052331D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44572B17BE0F0052331D /* UserProfile.swift */; };
 		93CB445C2B17CC820052331D /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB445B2B17CC820052331D /* ImagePickerManager.swift */; };
 		93CB44CA2B18F7D90052331D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 93CB44C92B18F7D90052331D /* FirebaseAnalyticsSwift */; };
@@ -40,6 +39,7 @@
 		93CB44E52B192B870052331D /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 93CB44E42B192B860052331D /* LoginVideo.mp4 */; };
 		93CB44EA2B1B6A530052331D /* UIViewController+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44E92B1B6A530052331D /* UIViewController+HideKeyboard.swift */; };
 		93CB44EC2B1B6C500052331D /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44EB2B1B6C500052331D /* ActivityIndicatorManager.swift */; };
+		93CB44F52B1B89260052331D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93CB44F42B1B89260052331D /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,12 +59,12 @@
 		93B7050C2B15359F00F5B46F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		93B7050E2B1535B100F5B46F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		93B705132B15371000F5B46F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		93CB44552B176C3A0052331D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		93CB44572B17BE0F0052331D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		93CB445B2B17CC820052331D /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		93CB44E42B192B860052331D /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
 		93CB44E92B1B6A530052331D /* UIViewController+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HideKeyboard.swift"; sourceTree = "<group>"; };
 		93CB44EB2B1B6C500052331D /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
+		93CB44F42B1B89260052331D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +129,8 @@
 				93B704C32B1521A300F5B46F /* Main.storyboard */,
 				93B704C62B1521A500F5B46F /* Assets.xcassets */,
 				93B704C82B1521A500F5B46F /* LaunchScreen.storyboard */,
+				93CB44F42B1B89260052331D /* GoogleService-Info.plist */,
 				93B704CB2B1521A500F5B46F /* Info.plist */,
-				93CB44552B176C3A0052331D /* GoogleService-Info.plist */,
 			);
 			path = MyLoginDemo;
 			sourceTree = "<group>";
@@ -253,8 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				93B704CA2B1521A500F5B46F /* LaunchScreen.storyboard in Resources */,
-				93CB44562B176C3A0052331D /* GoogleService-Info.plist in Resources */,
 				93B704C72B1521A500F5B46F /* Assets.xcassets in Resources */,
+				93CB44F52B1B89260052331D /* GoogleService-Info.plist in Resources */,
 				93B704C52B1521A300F5B46F /* Main.storyboard in Resources */,
 				93CB44E52B192B870052331D /* LoginVideo.mp4 in Resources */,
 			);
