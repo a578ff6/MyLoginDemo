@@ -38,6 +38,8 @@
 		93CB44E02B18F7D90052331D /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 93CB44DF2B18F7D90052331D /* FirebaseStorageCombine-Community */; };
 		93CB44E32B190A9C0052331D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 93CB44E22B190A9C0052331D /* Kingfisher */; };
 		93CB44E52B192B870052331D /* LoginVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 93CB44E42B192B860052331D /* LoginVideo.mp4 */; };
+		93CB44EA2B1B6A530052331D /* UIViewController+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44E92B1B6A530052331D /* UIViewController+HideKeyboard.swift */; };
+		93CB44EC2B1B6C500052331D /* ActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CB44EB2B1B6C500052331D /* ActivityIndicatorManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		93CB44572B17BE0F0052331D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		93CB445B2B17CC820052331D /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		93CB44E42B192B860052331D /* LoginVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginVideo.mp4; sourceTree = "<group>"; };
+		93CB44E92B1B6A530052331D /* UIViewController+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HideKeyboard.swift"; sourceTree = "<group>"; };
+		93CB44EB2B1B6C500052331D /* ActivityIndicatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,8 @@
 				932FBA412B167F92006B7896 /* Constants.swift */,
 				93CB445B2B17CC820052331D /* ImagePickerManager.swift */,
 				932FBA3B2B165572006B7896 /* Utilities.swift */,
+				93CB44E92B1B6A530052331D /* UIViewController+HideKeyboard.swift */,
+				93CB44EB2B1B6C500052331D /* ActivityIndicatorManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -264,11 +270,13 @@
 				93B7050F2B1535B100F5B46F /* HomeViewController.swift in Sources */,
 				932FBA392B160B04006B7896 /* FirebaseController.swift in Sources */,
 				932FBA442B16926C006B7896 /* ForgotPasswordViewController.swift in Sources */,
+				93CB44EA2B1B6A530052331D /* UIViewController+HideKeyboard.swift in Sources */,
 				93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */,
 				93B7050B2B15358B00F5B46F /* SignUpViewController.swift in Sources */,
 				93B705142B15371000F5B46F /* FirstViewController.swift in Sources */,
 				932FBA422B167F92006B7896 /* Constants.swift in Sources */,
 				93B704BE2B1521A300F5B46F /* AppDelegate.swift in Sources */,
+				93CB44EC2B1B6C500052331D /* ActivityIndicatorManager.swift in Sources */,
 				93CB44582B17BE0F0052331D /* UserProfile.swift in Sources */,
 				932FBA3C2B165572006B7896 /* Utilities.swift in Sources */,
 				932FBA402B1660BD006B7896 /* AlertService.swift in Sources */,

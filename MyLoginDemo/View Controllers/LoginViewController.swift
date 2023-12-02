@@ -27,7 +27,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ActivityIndicatorManager.shared.activityIndicator(on: self.view)    // 設置活動指示器
         setUpElements()
+        setUpHideKeyboardOnTap()
     }
     
 
@@ -41,9 +43,16 @@ class LoginViewController: UIViewController {
             return
         }
         
+        // 啟動活動指示器
+        ActivityIndicatorManager.shared.startLoading()
+        
         // 呼叫 FirebaseController 進行登入
         FirebaseController.shared.signIn(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
+                
+                // 停止活動指示器
+                ActivityIndicatorManager.shared.stopLoading()
+                
                 switch result {
                 case .success(_):
                     

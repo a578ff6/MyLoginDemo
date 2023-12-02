@@ -5,7 +5,6 @@
 //  Created by 曹家瑋 on 2023/11/29.
 //
 
-import Foundation
 import UIKit
 
 /// Utilities: 提供統一樣式設定，包括文字輸入框、按鈕、圖片視圖和標籤。

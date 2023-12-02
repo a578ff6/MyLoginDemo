@@ -20,8 +20,9 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ActivityIndicatorManager.shared.activityIndicator(on: self.view)    // 設置活動指示器
         setUpElements()
-        
+        setUpHideKeyboardOnTap()
     }
     
     /// 處理註冊按鈕
@@ -48,8 +49,14 @@ class SignUpViewController: UIViewController {
             return
         }
         
+        // 啟動活動指示器
+        ActivityIndicatorManager.shared.startLoading()
+
         // 透過 FirebaseController 進行用戶註冊
         FirebaseController.shared.creatUser(email: email, password: password, firstName: firstName, lastName: lastName) { [weak self] result in
+            
+            ActivityIndicatorManager.shared.stopLoading()   // 停止活動指示器
+            
             switch result {
             case .success(_):
                 

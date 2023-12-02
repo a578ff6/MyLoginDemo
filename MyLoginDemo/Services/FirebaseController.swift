@@ -138,29 +138,76 @@ class FirebaseController {
     }
     
     
+    /// 上傳用戶大頭照至 Firebase Storage 並更新 Firestore 中的用戶資料
+    /// - Parameters:
+    ///   - image: 要上傳的 UIImage 對象。
+    ///   - userID: 上傳用戶的唯一識別碼。
+    ///   - completion: 完成後的回調，返回操作的結果。
+    func uploadAndUpdateProfileImage(_ image: UIImage, forUserID userID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        // 將 UIImage 轉換為 JPEG
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            completion(.failure(FirebaseError.unknownError))
+            return
+        }
+
+        // Firebase Storage 參考位置
+        let storageRef = Storage.storage().reference().child("profile_images").child("\(userID).jpg")
+
+        // 上傳圖片
+        storageRef.putData(imageData, metadata: nil) { metadata, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            // 獲取並返回圖片的 URL
+            storageRef.downloadURL { url, error in
+                if let url = url {
+                    // 更新 Firestore 中的用戶資料
+                    let db = Firestore.firestore()
+                    db.collection("users").document(userID).updateData(["photoURL": url.absoluteString]) { error in
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }
+                } else if let error = error {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - 原始版本將上傳圖片及更新資料分開來
+
+/*
     /// 上傳用戶大頭照至 Firebase Storage
     /// - Parameters:
     ///   - image: 要上傳的 UIImage 對象。
     ///   - userID: 上傳用戶的唯一識別碼。
     func uploadProfileImage(_ image: UIImage, forUserID userID: String, completion: @escaping (Result<URL, Error>) -> Void) {
-        
+
         /// 將 UIImage 轉換為 JPEG ，大小設置為 0.5 。
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             return
         }
-        
+
         /// 指向 Firebase Storage 中特定位置的參考，用於存儲大頭照。
         let storageRef = Storage.storage().reference().child("profile_images").child("\(userID).jpg")
-        
+
         // 上傳圖片數據到指定的存儲位置。
         storageRef.putData(imageData, metadata: nil) { metadata, error in
-            
+
             // 如果上傳過程中出現錯誤。
             if let error = error {
                 completion(.failure(error))
                 return
             }
-            
+
             // 上傳成功後，獲取並返回圖片的 URL。
             storageRef.downloadURL { url, error in
                 if let url = url {
@@ -171,17 +218,17 @@ class FirebaseController {
             }
         }
     }
-    
+
 
     /// 更新用戶的大頭照 URL 至 Firestore
     /// - Parameters:
     ///   - uid: 用戶的唯一識別碼（UID）。
     ///   - photoURL: 上傳後圖片的 URL。
     func updateUserProfilePhoto(uid: String, photoURL: URL, completion: @escaping (Result<Void, Error>) -> Void) {
-        
+
         /// 獲取 Firestore 的實例
         let db = Firestore.firestore()
-        
+
         // 更新指定用戶文檔的 'photoURL' 欄位
         db.collection("users").document(uid).updateData(["photoURL": photoURL.absoluteString]) { error in
             if let error = error {
@@ -191,7 +238,4 @@ class FirebaseController {
             }
         }
     }
-    
-    
-}
-
+*/

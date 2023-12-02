@@ -18,7 +18,9 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ActivityIndicatorManager.shared.activityIndicator(on: self.view)    // 設置活動指示器
         setUpElements()
+        setUpHideKeyboardOnTap()
     }
     
     
@@ -36,9 +38,16 @@ class ForgotPasswordViewController: UIViewController {
             return
         }
         
+        
+        ActivityIndicatorManager.shared.startLoading()          // 啟動活動指示器
+        
+        
         // 發送密碼重置請求
         FirebaseController.shared.sendPasswordRest(email: email) { result in
             DispatchQueue.main.async {
+                
+                ActivityIndicatorManager.shared.stopLoading()   // 停止活動指示器
+                
                 switch result {
                 case .success(_):
                     print("重置請求已發送")
