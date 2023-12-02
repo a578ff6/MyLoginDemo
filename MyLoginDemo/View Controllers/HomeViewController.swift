@@ -109,7 +109,7 @@ class HomeViewController: UIViewController {
                     // 使用 Kingfisher 加載用戶的大頭照
                     if let photoURLString = userProfile.photoURL, let url = URL(string: photoURLString) {
                         // 請除緩存中的舊圖片
-                        KingfisherManager.shared.cache.removeImage(forKey: url.absoluteString)
+                        // KingfisherManager.shared.cache.removeImage(forKey: url.absoluteString)
                         // 加載圖片並在加載完成後停止活動指示器
                         self?.userPhotoImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "person.crop.circle.fill"), options: [], completionHandler: { result in
                             ActivityIndicatorManager.shared.stopLoading()
