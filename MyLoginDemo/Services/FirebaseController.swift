@@ -9,6 +9,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
+import GoogleSignIn
 
 /// FirebaseController: 負責管理和執行所有 Firebase 相關操作
 class FirebaseController {
@@ -16,9 +17,39 @@ class FirebaseController {
     /// 單例模式，確保只有一個 FirebaseController 實例。
     static let shared = FirebaseController()
     
+    
     /// 自定義錯誤類型，用於處理 Firebase 相關錯誤
     enum FirebaseError: Error {
         case unknownError
+        case userCreationFailed(String)
+        case signInFailed(String)
+        case dataFetchFailed(String)
+        case userProfileUpdateFailed(String)
+        case passwordResetFailed(String)
+        case documentNotExist
+        case dataMappingFailed
+
+        /// 錯誤訊息
+        var localizedDescription: String {
+            switch self {
+            case .unknownError:
+                return "未知錯誤發生。"
+            case .userCreationFailed(let message):
+                return "用戶創建失敗：\(message)"
+            case .signInFailed(let message):
+                return "登入失敗：\(message)"
+            case .dataFetchFailed(let message):
+                return "資料擷取失敗：\(message)"
+            case .userProfileUpdateFailed(let message):
+                return "用戶資料更新失敗：\(message)"
+            case .passwordResetFailed(let message):
+                return "密碼重置失敗：\(message)"
+            case .documentNotExist:
+                return "文檔不存在。"
+            case .dataMappingFailed:
+                return "資料映射失敗。"
+            }
+        }
     }
     
     /// 檢查電子郵件格式是否有效
@@ -41,13 +72,13 @@ class FirebaseController {
         // 使用 FirebaseAuth 進行用戶註冊
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(FirebaseError.userCreationFailed(error.localizedDescription)))
                 return
             }
             
             /// 確認成功創建用戶
             guard let user = result?.user else {
-                completion(.failure(FirebaseError.unknownError))
+                completion(.failure(FirebaseError.userCreationFailed("無法獲取用戶資料")))
                 return
             }
             
@@ -61,7 +92,7 @@ class FirebaseController {
             ]) { error in
                 // 處理資料儲存時的錯誤
                 if let error = error {
-                    completion(.failure(error))
+                    completion(.failure(FirebaseError.userCreationFailed(error.localizedDescription)))
                 } else {
                     completion(.success(user))
                 }
@@ -82,13 +113,13 @@ class FirebaseController {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("登錄錯誤代碼: \((error as NSError).code), 描述: \(error.localizedDescription)")
-                completion(.failure(error))
+                completion(.failure(FirebaseError.signInFailed(error.localizedDescription)))
                 return
             }
                     
             // 如果沒有錯誤發生，則檢查返回的用戶對象是否存在。
             guard let user = result?.user else {
-                completion(.failure(FirebaseError.unknownError))
+                completion(.failure(FirebaseError.signInFailed("無法登入")))
                 return
             }
             
@@ -103,7 +134,8 @@ class FirebaseController {
         
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
-                completion(.failure(error))       // 發生錯誤，通過 completion 返回錯誤
+                completion(.failure(FirebaseError.passwordResetFailed(error.localizedDescription)))       // 發生錯誤，通過 completion 返回錯誤
+
             } else {
                 completion(.success(()))          // 密碼重置郵件發送成功
             }
@@ -114,26 +146,24 @@ class FirebaseController {
     /// 獲取指定用戶ID的用戶資料。
     /// - Parameters:
     ///   - uid: 用戶ID，用於識別 Firestore 中的具體用戶文檔。
+    // 獲取用戶資料函數
     func fetchUserProfile(uid: String, completion: @escaping (Result<UserProfile, Error>) -> Void) {
-        
         /// 獲取 Firestore 實例
         let db = Firestore.firestore()
         
         // 根據用戶ID訪問對應的文檔
-        db.collection("users").document(uid).getDocument { (document, error ) in
-            /// 檢查文檔是否存在且能正確讀取
-            if let document = document, document.exists {
-                do {
-                    let userProfile = try document.data(as: UserProfile.self)      // 將文檔資料映射到 UserProfile 結構體
-                    completion(.success(userProfile))
-                } catch {
-                    completion(.failure(error))                                    // 映射失敗，回調失敗結果
-                }
-            } else if let error = error {
-                completion(.failure(error))                                        // 讀取文檔失敗，回調失敗結果
-            } else {
-                completion(.failure(FirebaseError.unknownError))                   // 文檔不存在，回調未知錯誤
+        db.collection("users").document(uid).getDocument { document, error in
+            if let error = error {
+                completion(.failure(FirebaseError.dataFetchFailed(error.localizedDescription)))
+                return
             }
+            
+            guard let document = document, document.exists, let userProfile = try? document.data(as: UserProfile.self) else {
+                completion(.failure(FirebaseError.dataFetchFailed("用戶資料不存在或無法解析")))
+                return
+            }
+            
+            completion(.success(userProfile))
         }
     }
     
@@ -146,7 +176,7 @@ class FirebaseController {
     func uploadAndUpdateProfileImage(_ image: UIImage, forUserID userID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         // 將 UIImage 轉換為 JPEG
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
-            completion(.failure(FirebaseError.unknownError))
+            completion(.failure(FirebaseError.userProfileUpdateFailed("圖片轉換失敗")))
             return
         }
 
@@ -156,7 +186,7 @@ class FirebaseController {
         // 上傳圖片
         storageRef.putData(imageData, metadata: nil) { metadata, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(FirebaseError.userProfileUpdateFailed(error.localizedDescription)))
                 return
             }
 
@@ -167,19 +197,24 @@ class FirebaseController {
                     let db = Firestore.firestore()
                     db.collection("users").document(userID).updateData(["photoURL": url.absoluteString]) { error in
                         if let error = error {
-                            completion(.failure(error))
+                            completion(.failure(FirebaseError.userProfileUpdateFailed(error.localizedDescription)))
                         } else {
                             completion(.success(()))
                         }
                     }
                 } else if let error = error {
-                    completion(.failure(error))
+                    completion(.failure(FirebaseError.userProfileUpdateFailed(error.localizedDescription)))
                 }
             }
         }
     }
     
+    
 }
+
+
+
+
 
 
 // MARK: - 原始版本將上傳圖片及更新資料分開來
