@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
 
 // MARK: 負責處理用戶註冊的視圖控制器
 class SignUpViewController: UIViewController {

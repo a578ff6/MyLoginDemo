@@ -9,7 +9,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
-import GoogleSignIn
+
 
 /// FirebaseController: 負責管理和執行所有 Firebase 相關操作
 class FirebaseController {
@@ -18,40 +18,7 @@ class FirebaseController {
     static let shared = FirebaseController()
     
     
-    /// 自定義錯誤類型，用於處理 Firebase 相關錯誤
-    enum FirebaseError: Error {
-        case unknownError
-        case userCreationFailed(String)
-        case signInFailed(String)
-        case dataFetchFailed(String)
-        case userProfileUpdateFailed(String)
-        case passwordResetFailed(String)
-        case documentNotExist
-        case dataMappingFailed
-
-        /// 錯誤訊息
-        var localizedDescription: String {
-            switch self {
-            case .unknownError:
-                return "未知錯誤發生。"
-            case .userCreationFailed(let message):
-                return "用戶創建失敗：\(message)"
-            case .signInFailed(let message):
-                return "登入失敗：\(message)"
-            case .dataFetchFailed(let message):
-                return "資料擷取失敗：\(message)"
-            case .userProfileUpdateFailed(let message):
-                return "用戶資料更新失敗：\(message)"
-            case .passwordResetFailed(let message):
-                return "密碼重置失敗：\(message)"
-            case .documentNotExist:
-                return "文檔不存在。"
-            case .dataMappingFailed:
-                return "資料映射失敗。"
-            }
-        }
-    }
-    
+    // MARK: - 郵件、密碼檢查
     /// 檢查電子郵件格式是否有效
     static func isEmailvalid(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -65,6 +32,9 @@ class FirebaseController {
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
         return passwordTest.evaluate(with: password)
     }
+    
+    
+    // MARK: - Email登入、註冊相關
     
     /// 創建新用戶，並將用戶資料儲存到 Firestore。
     func creatUser(email: String, password: String, firstName: String, lastName: String, completion: @escaping (Result<User, Error>) -> Void) {
@@ -125,20 +95,6 @@ class FirebaseController {
             
             // 登入成功，回傳用戶對象。
             completion(.success(user))
-        }
-    }
-    
-    
-    /// 發送密碼重置郵件
-    func sendPasswordRest(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
-            if let error = error {
-                completion(.failure(FirebaseError.passwordResetFailed(error.localizedDescription)))       // 發生錯誤，通過 completion 返回錯誤
-
-            } else {
-                completion(.success(()))          // 密碼重置郵件發送成功
-            }
         }
     }
     
@@ -210,9 +166,60 @@ class FirebaseController {
     }
     
     
+    // MARK: - 密碼重置相關
+    
+    /// 發送密碼重置郵件
+    func sendPasswordRest(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(.failure(FirebaseError.passwordResetFailed(error.localizedDescription)))       // 發生錯誤，通過 completion 返回錯誤
+
+            } else {
+                completion(.success(()))          // 密碼重置郵件發送成功
+            }
+        }
+    }
+
+
 }
 
+// MARK: - 錯誤處理
+extension FirebaseController {
+    /// 自定義錯誤類型，用於處理 Firebase 相關錯誤
+    enum FirebaseError: Error {
+        case unknownError
+        case userCreationFailed(String)
+        case signInFailed(String)
+        case dataFetchFailed(String)
+        case userProfileUpdateFailed(String)
+        case passwordResetFailed(String)
+        case documentNotExist
+        case dataMappingFailed
 
+        /// 錯誤訊息
+        var localizedDescription: String {
+            switch self {
+            case .unknownError:
+                return "未知錯誤發生。"
+            case .userCreationFailed(let message):
+                return "用戶創建失敗：\(message)"
+            case .signInFailed(let message):
+                return "登入失敗：\(message)"
+            case .dataFetchFailed(let message):
+                return "資料擷取失敗：\(message)"
+            case .userProfileUpdateFailed(let message):
+                return "用戶資料更新失敗：\(message)"
+            case .passwordResetFailed(let message):
+                return "密碼重置失敗：\(message)"
+            case .documentNotExist:
+                return "文檔不存在。"
+            case .dataMappingFailed:
+                return "資料映射失敗。"
+            }
+        }
+    }
+}
 
 
 

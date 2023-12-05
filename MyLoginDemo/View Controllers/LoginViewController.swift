@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import GoogleSignIn
+
 
 // MARK: 負責處理用戶登入的視圖控制器
 class LoginViewController: UIViewController {
@@ -17,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,9 @@ class LoginViewController: UIViewController {
         ActivityIndicatorManager.shared.activityIndicator(on: self.view)    // 設置活動指示器
         setUpElements()
         setUpHideKeyboardOnTap()
+        
+        setUpGoogleSignInButton()   //  Google設置
+
     }
     
 
@@ -63,6 +70,24 @@ class LoginViewController: UIViewController {
         }
    
     }
+    
+    
+    func setUpGoogleSignInButton() {
+        googleSignInButton.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
+    }
+    
+    @objc func handleGoogleSignIn() {
+        GoogleSignInManager.shared.signInWithGoogle(presentingViewController: self) { [weak self] result in
+            switch result {
+            case .success(let user):
+                print("Google 登入成功: \(user)")
+                self?.transitionToHome()
+            case .failure(let error):
+                print("Google 登入失敗: \(error)")
+            }
+        }
+    }
+    
     
     /// 設定介面元素的外觀
     func setUpElements() {

@@ -13,6 +13,9 @@ class FirstViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+
+
+    
     
     /// 影片播放器
     var videoPlayer: AVPlayer?
@@ -36,7 +39,7 @@ class FirstViewController: UIViewController {
         // 影片播放完畢或離開當前頁面時，移除通知觀察者
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: videoPlayer?.currentItem)
     }
-    
+
     
     /// 設定按鈕樣式
     func setUpElements() {
@@ -84,6 +87,7 @@ class FirstViewController: UIViewController {
         videoPlayer?.seek(to: CMTime.zero)
         videoPlayer?.play()
     }
+
 
 }
 

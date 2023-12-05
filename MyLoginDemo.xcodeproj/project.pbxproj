@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9302B3E52B1F5ACA00FD6868 /* GoogleSignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302B3E42B1F5ACA00FD6868 /* GoogleSignInManager.swift */; };
 		9314D0632B1DFB35007DA005 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9314D0622B1DFB35007DA005 /* GoogleSignIn */; };
 		9314D0652B1DFB35007DA005 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9314D0642B1DFB35007DA005 /* GoogleSignInSwift */; };
 		9314D0672B1DFC6D007DA005 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9314D0662B1DFC6D007DA005 /* GoogleSignIn */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9302B3E42B1F5ACA00FD6868 /* GoogleSignInManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInManager.swift; sourceTree = "<group>"; };
 		932FBA382B160B04006B7896 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		932FBA3B2B165572006B7896 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		932FBA3F2B1660BD006B7896 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				932FBA382B160B04006B7896 /* FirebaseController.swift */,
+				9302B3E42B1F5ACA00FD6868 /* GoogleSignInManager.swift */,
 				932FBA3F2B1660BD006B7896 /* AlertService.swift */,
 			);
 			path = Services;
@@ -284,6 +287,7 @@
 				932FBA392B160B04006B7896 /* FirebaseController.swift in Sources */,
 				932FBA442B16926C006B7896 /* ForgotPasswordViewController.swift in Sources */,
 				93CB44EA2B1B6A530052331D /* UIViewController+HideKeyboard.swift in Sources */,
+				9302B3E52B1F5ACA00FD6868 /* GoogleSignInManager.swift in Sources */,
 				93B7050D2B15359F00F5B46F /* LoginViewController.swift in Sources */,
 				93B7050B2B15358B00F5B46F /* SignUpViewController.swift in Sources */,
 				93B705142B15371000F5B46F /* FirstViewController.swift in Sources */,

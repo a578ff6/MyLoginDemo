@@ -126,7 +126,24 @@ class HomeViewController: UIViewController {
                 }
             }
         }
+    
     }
+    
+    /*
+  
+                     if let urlString = userProfile.photoURL, let url = URL(string: urlString) {
+                         self?.userPhotoImageView.kf.setImage(with: url)
+                     }
+
+                 case .failure(let error):
+                     // 處理錯誤
+                     print("錯誤： \(error.localizedDescription)")
+                 }
+             }
+         }
+     }
+
+     */
     
     
     /// 初始化介面元素的樣式
