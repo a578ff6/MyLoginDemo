@@ -9,7 +9,8 @@
 import UIKit
 import FirebaseAuth
 import GoogleSignIn
-
+import FacebookLogin
+import FacebookCore
 
 // MARK: 負責處理用戶登入的視圖控制器
 class LoginViewController: UIViewController {
@@ -19,7 +20,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
-    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    @IBOutlet weak var googleSignInButton: UIButton!
+    
+    @IBOutlet weak var facebookSignInButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -29,14 +32,11 @@ class LoginViewController: UIViewController {
         setUpElements()
         setUpHideKeyboardOnTap()
         
-        setUpGoogleSignInButton()   //  Google設置
-
     }
     
 
     /// 處理登入按鈕
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        
         // 檢查電子郵件和密碼輸入框是否有輸入，並且不為空
         guard let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
@@ -72,11 +72,7 @@ class LoginViewController: UIViewController {
     }
     
     
-    func setUpGoogleSignInButton() {
-        googleSignInButton.addTarget(self, action: #selector(handleGoogleSignIn), for: .touchUpInside)
-    }
-    
-    @objc func handleGoogleSignIn() {
+    @IBAction func googleSignInButtonTapped(_ sender: UIButton) {
         GoogleSignInManager.shared.signInWithGoogle(presentingViewController: self) { [weak self] result in
             switch result {
             case .success(let user):
@@ -89,12 +85,40 @@ class LoginViewController: UIViewController {
     }
     
     
+    
+    
+    @IBAction func facebookSignInButtonTapped(_ sender: UIButton) {
+        
+        // 啟動活動指示器
+        ActivityIndicatorManager.shared.startLoading()
+        
+        FacebookSignInManager.shared.signInWithFacebook(presentingViewController: self) { [weak self] reulst in
+            DispatchQueue.main.async {
+                // 停止活動指示器
+                ActivityIndicatorManager.shared.stopLoading()
+                
+                switch reulst {
+                case .success(let user):
+                    print("Facebook 登入成功: \(user)")
+                    self?.transitionToHome() // 登入成功後進行頁面跳轉
+                case .failure(let error):
+                    print("Facebook 登入失敗: \(error)")
+                    //AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!) // 登入失敗時顯示錯誤訊息
+
+                }
+            }
+        }
+    }
+    
+    
     /// 設定介面元素的外觀
     func setUpElements() {
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
         Utilities.styleFilledButton(loginButton)
         Utilities.styleHollowButton(forgotPasswordButton)
+        Utilities.customFacebookButtonStyle(facebookSignInButton)
+        Utilities.customGoogleButtonStyle(googleSignInButton)
     }
     
     /// 註冊或登入成功後的處理

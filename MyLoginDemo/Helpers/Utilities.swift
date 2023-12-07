@@ -50,5 +50,19 @@ class Utilities {
         label.layer.addSublayer(bottomLine)
     }
     
+    static func customFacebookButtonStyle(_ button: UIButton) {
+        button.layer.cornerRadius = 5
+        button.tintColor = UIColor.white
+        button.backgroundColor = UIColor(red: 66/255, green: 103/255, blue: 178/255, alpha: 1)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+    }
+    
+    static func customGoogleButtonStyle(_ button: UIButton) {
+        button.layer.cornerRadius = 5
+        button.tintColor = UIColor.white
+        button.backgroundColor = UIColor(red: 219/255, green: 68/255, blue: 55/255, alpha: 1)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .heavy)
+    }
+    
     
 }

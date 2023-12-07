@@ -73,7 +73,7 @@ class GoogleSignInManager {
                         completion(.success(firebaseUser))
                     } else {
                         // 如果用戶不存在，則創建新的用戶資料。
-                        self.updateUserProfile(uid: firebaseUser.uid, firstName: firstName, lastName: lastName, email: email, photoURL: googlePhotoURL,completion: completion)
+                        FirebaseController.shared.updateUserProfile(uid: firebaseUser.uid, firstName: firstName, lastName: lastName, email: email, photoURL: googlePhotoURL,completion: completion)
                     }
                 }
                 
@@ -82,55 +82,8 @@ class GoogleSignInManager {
         }
         
     }
-    
-    
-    /// 更新 Firestore 中的用戶資料。
-    private func updateUserProfile(uid: String, firstName: String, lastName: String, email: String, photoURL: String, completion: @escaping (Result<User, Error>) -> Void) {
-        
-        let db = Firestore.firestore()
-        
-        // 設置用戶資料，包括姓名、電子郵件和大頭照 URL。
-        db.collection("users").document(uid).setData([
-            "firstName": firstName,
-            "lastName": lastName,
-            "email": email,
-            "photoURL": photoURL
-        ]) { error in
-            if let error = error {
-                // 如果在設置過程中發生錯誤，返回詳細的錯誤訊息。
-                completion(.failure(FirebaseError.dataFetchFailed("更新 Firestore 用戶資料時發生錯誤：\(error.localizedDescription)")))
-            } else {
-                // 如果成功，獲取 Firebase Auth 中的 User 對象。
-                if let user = Auth.auth().currentUser {
-                    completion(.success(user))
-                } else {
-                    // 如果無法獲取 User 對象，返回一個自定義錯誤訊息。
-                    completion(.failure(FirebaseError.userFetchFailed("無法從 Firebase Auth 獲取用戶資訊。")))
-                }
-            }
-        }
-    }
 
     
 }
 
 
-enum FirebaseError: Error {
-    case unknownError
-    case signInFailed(String)
-    case userFetchFailed(String)
-    case dataFetchFailed(String)
-    
-    var localizedDescription: String {
-        switch self {
-        case .unknownError:
-            return "未知錯誤發生。"
-        case .signInFailed(let message):
-            return "登入失敗：\(message)"
-        case .userFetchFailed(let message):
-            return "獲取用戶資訊失敗：\(message)"
-        case .dataFetchFailed(let message):
-            return "資料擷取失敗：\(message)"
-        }
-    }
-}

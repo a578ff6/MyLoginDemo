@@ -166,6 +166,36 @@ class FirebaseController {
     }
     
     
+    /// 更新 Firestore 中的用戶資料。（google、facebook使用）
+    func updateUserProfile(uid: String, firstName: String, lastName: String, email: String, photoURL: String, completion: @escaping (Result<User, Error>) -> Void) {
+        
+        let db = Firestore.firestore()
+        
+        // 設置用戶資料，包括姓名、電子郵件和大頭照 URL。
+        db.collection("users").document(uid).setData([
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "photoURL": photoURL
+        ]) { error in
+            if let error = error {
+                // 如果在設置過程中發生錯誤，返回詳細的錯誤訊息。
+                completion(.failure(FirebaseError.dataFetchFailed("更新 Firestore 用戶資料時發生錯誤：\(error.localizedDescription)")))
+            } else {
+                // 如果成功，獲取 Firebase Auth 中的 User 對象。
+                if let user = Auth.auth().currentUser {
+                    completion(.success(user))
+                } else {
+                    // 如果無法獲取 User 對象，返回一個自定義錯誤訊息。
+                    completion(.failure(FirebaseError.userFetchFailed("無法從 Firebase Auth 獲取用戶資訊。")))
+                }
+            }
+        }
+        
+        
+    }
+    
+    
     // MARK: - 密碼重置相關
     
     /// 發送密碼重置郵件
@@ -183,44 +213,6 @@ class FirebaseController {
 
 
 }
-
-// MARK: - 錯誤處理
-extension FirebaseController {
-    /// 自定義錯誤類型，用於處理 Firebase 相關錯誤
-    enum FirebaseError: Error {
-        case unknownError
-        case userCreationFailed(String)
-        case signInFailed(String)
-        case dataFetchFailed(String)
-        case userProfileUpdateFailed(String)
-        case passwordResetFailed(String)
-        case documentNotExist
-        case dataMappingFailed
-
-        /// 錯誤訊息
-        var localizedDescription: String {
-            switch self {
-            case .unknownError:
-                return "未知錯誤發生。"
-            case .userCreationFailed(let message):
-                return "用戶創建失敗：\(message)"
-            case .signInFailed(let message):
-                return "登入失敗：\(message)"
-            case .dataFetchFailed(let message):
-                return "資料擷取失敗：\(message)"
-            case .userProfileUpdateFailed(let message):
-                return "用戶資料更新失敗：\(message)"
-            case .passwordResetFailed(let message):
-                return "密碼重置失敗：\(message)"
-            case .documentNotExist:
-                return "文檔不存在。"
-            case .dataMappingFailed:
-                return "資料映射失敗。"
-            }
-        }
-    }
-}
-
 
 
 

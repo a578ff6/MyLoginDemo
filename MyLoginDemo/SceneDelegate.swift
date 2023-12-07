@@ -8,10 +8,29 @@
 
 import UIKit
 import FirebaseAuth
+import FacebookCore
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    /// 當從外部 URL 打開 App 時調用
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // 確保從 URLContexts 獲取第一個 URL
+        guard let url = URLContexts.first?.url else {
+            return
+        }
+
+        // 將 URL 傳遞給 Facebook SDK 進行處理
+        // 這確保當 App 從 Facebook 登入流程返回時，Facebook SDK 可以正確處理返回的 URL
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            open: url,
+            sourceApplication: nil,
+            annotation: [UIApplication.OpenURLOptionsKey.annotation]
+        )
+    }
 
     /// 當場景與 App 連接時調用
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
