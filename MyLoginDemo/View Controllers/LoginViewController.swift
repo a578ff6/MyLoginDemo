@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
     @IBOutlet weak var googleSignInButton: UIButton!
-    
     @IBOutlet weak var facebookSignInButton: UIButton!
     
     
@@ -72,26 +71,37 @@ class LoginViewController: UIViewController {
     }
     
     
+    /// 處理 Google 登入按鈕
     @IBAction func googleSignInButtonTapped(_ sender: UIButton) {
+        
+        // 啟動活動指示器
+        ActivityIndicatorManager.shared.startLoading()
+        
+        // 使用 Google 登入
         GoogleSignInManager.shared.signInWithGoogle(presentingViewController: self) { [weak self] result in
-            switch result {
-            case .success(let user):
-                print("Google 登入成功: \(user)")
-                self?.transitionToHome()
-            case .failure(let error):
-                print("Google 登入失敗: \(error)")
+            DispatchQueue.main.async {
+                // 停止活動指示器
+                ActivityIndicatorManager.shared.stopLoading()
+                
+                switch result {
+                case .success(let user):
+                    print("Google 登入成功: \(user)")
+                    self?.transitionToHome()
+                case .failure(let error):
+                    print("Google 登入失敗: \(error)")
+                }
             }
         }
     }
     
     
-    
-    
+    /// 處理 Facebook 登入按鈕
     @IBAction func facebookSignInButtonTapped(_ sender: UIButton) {
         
         // 啟動活動指示器
         ActivityIndicatorManager.shared.startLoading()
         
+        // 使用 Facebook 登入
         FacebookSignInManager.shared.signInWithFacebook(presentingViewController: self) { [weak self] reulst in
             DispatchQueue.main.async {
                 // 停止活動指示器
@@ -103,8 +113,6 @@ class LoginViewController: UIViewController {
                     self?.transitionToHome() // 登入成功後進行頁面跳轉
                 case .failure(let error):
                     print("Facebook 登入失敗: \(error)")
-                    //AlertService.showAlert(withTitle: "錯誤", message: error.localizedDescription, inViewController: self!) // 登入失敗時顯示錯誤訊息
-
                 }
             }
         }
